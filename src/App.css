@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+  display: flex;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.Navigation {
+  flex: 0 0 200px;
+  background: #F0F1F1;
+}
+.Projects__search {
+  padding: 16px 32px;
+}
+.Projects {
+  flex-grow: 1;
+}
+.Projects__list {
+    background: #FCFCFC;
+    padding: 32px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Project {
+    width: 25%;
+    background: #fff;
+    padding: 16px;
+    border-top: 3px solid purple;
+    border-radius: 2px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.18);
+    margin: 20px;
+    text-align: left;
+}
+.Project__name {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+}
+
+.Project__details {
+    color: #7f7f7f;
+}
+
+.Project__label {
+    font-size: 13px;
+    display: inline-block;
+    padding: 2px;
+    margin: 0 4px;
+    color: #fff;
+    background: #7f017f;
+    border-radius: 1px;
+}
+
+input[type=text] {
+    width: 300px;
+    background-color: #FCFCFC;
+    color: #7f7f7f;
+    padding: 14px 20px;
+    border: none;
+    border: 1px solid #f0f1f1;
+    cursor: pointer;
+}
