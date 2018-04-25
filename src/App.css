@@ -81,3 +81,16 @@ input[type=text] {
     border: 1px solid #f0f1f1;
     cursor: pointer;
 }
+
+.filter {
+    display: inline-block;
+    border: 1px solid;
+    padding: 4px;
+    margin: 2px;
+}
+.filter:hover {
+    cursor: pointer;
+}
+.filter.selected {
+    background: red;
+}
