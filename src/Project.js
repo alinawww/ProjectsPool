@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Project = (props: {project: Object}) => (
-  <div className="Project">
+  <div key={props.project.id} className="Project">
     <div className="Project__image">
     </div>
     <div className="Project__description">
@@ -11,9 +11,9 @@ export const Project = (props: {project: Object}) => (
       </p>
       <div className="Project__labels">
         {
-          // props.project.tags.map(tag => {
-          //   return <span className="Project__label">{tag}</span>
-          // })
+          props.project.tags && props.project.tags.map(tag => {
+            return <span key={tag} className="Project__label">{tag}</span>
+          })
         }
       </div>
     </div>

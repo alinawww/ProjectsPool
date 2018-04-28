@@ -7,40 +7,30 @@ import classnames from 'classnames';
 
 
 const projects = [
-    {id: 1, title: 'test1', details: 'test details1', tags: [filters['team-size']['small']]},
-    {id: 2, title: 'ben', details: 'test details1', tags: [filters['team-size']['medium']]},
-    {id: 3, title: 'test1', details: 'test details1', tags: ['tag1', 'tag2', 'tag3']},
-    {id: 4, title: 'test1', details: 'this is alina', tags: ['tag1', 'tag2']},
-    {id: 5, title: 'begin', details: 'this is ben', tags: ['tag1', 'tag2']},
-    {id: 6, title: 'test1', details: 'test details1', tags: ['tag1', 'tag2']},
+    {id: 1, title: 'project1', details: 'test details 1', tags: [filters['team-size']['small'], filters['amount']['small']]},
+    {id: 2, title: 'project2', details: 'test details 2', tags: [filters['team-size']['medium']]},
+    {id: 3, title: 'project3', details: 'test details 3', tags: [filters['team-size']['medium']]},
+    {id: 4, title: 'project4', details: 'test details 4', tags: [filters['team-size']['medium']]},
+    {id: 5, title: 'project5', details: 'test details 5', tags: [filters['team-size']['medium']]},
+    {id: 6, title: 'project6', details: 'test details 6', tags: [filters['team-size']['medium']]},
 ]
 
 
 class List extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            filteredProjects: projects,
-        }
-        this.filter = this.filter.bind(this)
-    }
-    filter (projects) {
-        if (this.props.filter) {
-            const filteredProjects = projects.filter((project) => project.details.toLowerCase().indexOf(this.props.filter.toLowerCase()) >= 0)
-            this.setState({filteredProjects})
-        }
-        console.log(this.props.selectedFilters);
-        return this.state.filteredProjects;
-        // return this.state.filteredProjects.filter((project) => this.props.selectedFilters.some(r => project.tags.indexOf(r) >= 0))
-        // return this.state.filteredProjects.filter((project) => project.tags.toLowerCase().indexOf(this.props.filter.toLowerCase()) >= 0)
-    }
     render () {
+        const {projects, selectedFilters} = this.props
+        const searchResults = projects.filter((project) => project.details.toLowerCase().indexOf(this.props.filter.toLowerCase()) >= 0)
+        const filteredProjects = selectedFilters.map(selectedFilter => searchResults.filter(project => project.tags.indexOf(selectedFilter) >= 0))
+        const shownProjects = selectedFilters.length
+                                ? [].concat.apply([], filteredProjects)
+                                : searchResults
+        console.log('shownProjects', shownProjects)
         return (
             <div className="Projects__list">
-            {
-                this.filter(this.props.projects)
-                .map(project => <Project key={project.id} project={project}/>)
-            }
+                {shownProjects.map(project => {
+                    console.log(project);
+                    return <Project key={project.id} project={project}/>
+                })}
             </div>
         )
     }
@@ -96,7 +86,7 @@ class App extends Component<> {
     }
     updateSearch(inputValue) {
         this.setState({
-            filter: inputValue
+            searchTerm: inputValue
         });
     }
 
