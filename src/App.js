@@ -2,18 +2,9 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {Project} from './Project.js';
-import {filters} from './filters.js';
+import {projects} from './Projects.js';
+import {filters, filterLabels} from './filters.js';
 import classnames from 'classnames';
-
-
-const projects = [
-    {id: 1, title: 'project1', details: 'test details 1', tags: [filters['team-size']['small'], filters['amount']['small']]},
-    {id: 2, title: 'project2', details: 'test details 2', tags: [filters['team-size']['medium']]},
-    {id: 3, title: 'project3', details: 'test details 3', tags: [filters['team-size']['medium']]},
-    {id: 4, title: 'project4', details: 'test details 4', tags: [filters['team-size']['medium']]},
-    {id: 5, title: 'project5', details: 'test details 5', tags: [filters['team-size']['medium']]},
-    {id: 6, title: 'project6', details: 'test details 6', tags: [filters['team-size']['medium']]},
-]
 
 
 class List extends React.Component {
@@ -21,14 +12,16 @@ class List extends React.Component {
         const {projects, selectedFilters} = this.props
         const searchResults = projects.filter((project) => project.details.toLowerCase().indexOf(this.props.filter.toLowerCase()) >= 0)
         const filteredProjects = selectedFilters.map(selectedFilter => searchResults.filter(project => project.tags.indexOf(selectedFilter) >= 0))
+        const flatFilteredProjects = [].concat.apply([], filteredProjects)
+        let unique_array = flatFilteredProjects.filter(function(elem, index, self) {
+            return index === self.indexOf(elem);
+        });
         const shownProjects = selectedFilters.length
-                                ? [].concat.apply([], filteredProjects)
+                                ? unique_array
                                 : searchResults
-        console.log('shownProjects', shownProjects)
         return (
             <div className="Projects__list">
                 {shownProjects.map(project => {
-                    console.log(project);
                     return <Project key={project.id} project={project}/>
                 })}
             </div>
@@ -73,6 +66,20 @@ class ProjectFilter extends React.Component {
     }
 }
 
+class ProjectFilterGroup extends React.Component {
+    render() {
+        const {filter, updateFilters} = this.props
+        return (
+            <div>
+                <h4>{filterLabels[filter]}</h4>
+                {Object.keys(filters[filter]).map(key => {
+                    return <ProjectFilter key={key} updateFilters={updateFilters} filter={filters[filter][key]}/>
+                })}
+            </div>
+        )
+    }
+}
+
 class App extends Component<> {
     constructor() {
         super();
@@ -91,7 +98,6 @@ class App extends Component<> {
     }
 
     updateFilters(filter) {
-        console.log(filter);
         if (this.state.filters.indexOf(filter) < 0) {
             this.setState(prevState => ({
                 filters: [...prevState.filters, filter]
@@ -112,9 +118,7 @@ class App extends Component<> {
                     <h2>Appreciation pool</h2>
                     <div className="Navigation__filters">
                         { Object.keys(filters).map(filter => {
-                            return Object.keys(filters[filter]).map(key => {
-                                return <ProjectFilter key={key} updateFilters={this.updateFilters} filter={filters[filter][key]}/>
-                            })
+                            return <ProjectFilterGroup key={filter} filter={filter} updateFilters={this.updateFilters} />
                         })}
                     </div>
                 </div>
