@@ -10,7 +10,7 @@
     justify-content: center;
     display: flex;
     align-items: center;
-    background: #ddd;
+    background: #FFA000;
     color: #fff;
 }
 .Logo h1 {
@@ -53,6 +53,13 @@
 }
 .filter-group__title {
     margin-top: 0;
+    color: #4e4e4e;
+    display: flex;
+}
+.filter-group__icon {
+    color: #448aff;
+    padding-right: 16px;
+    width: 32px;
 }
 .Header {
   display: flex;
@@ -85,12 +92,6 @@
 }
 
 .Project {
-    /* width: 25%; */
-    /* flex-basis: 25%; */
-    /* flex-grow: 1;
-    max-width: 300px; */
-    /* max-width: 24%; */
-    /* justify-content: space-between; */
     flex: 1 1 20%;
     box-sizing: border-box;
     background: #fff;
@@ -99,10 +100,13 @@
     margin: 16px;
     text-align: left;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 .Project__image {
     height: 100px;
-    background: url('https://source.unsplash.com/random');
+    /* background: url('https://source.unsplash.com/random'); */
+    background: #448AFF;
     background-size: cover;
 }
 
@@ -110,14 +114,19 @@
     font-size: 16px;
     font-weight: bold;
     margin: 0 0 8px 0;
+    color: #4e4e4e;
 }
 .Project__description {
     padding: 16px;
+    flex-grow: 1;
 }
 .Project__details {
     color: #7f7f7f;
 }
-
+.Project__labels {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+}
 .Project__label {
     font-size: 13px;
     display: inline-block;

@@ -182,9 +182,11 @@ class ProjectFilter extends React.Component {
 class ProjectFilterGroup extends React.Component {
     render() {
         const {filter, updateFilters} = this.props
+        const groupTitle = filterLabels[filter].title
+        const groupIcon = filterLabels[filter].icon
         return (
             <div className="filter-group">
-                <h4 className="filter-group__title">{filterLabels[filter]}</h4>
+                <h4 className="filter-group__title"><i className="filter-group__icon material-icons">{groupIcon}</i>{groupTitle}</h4>
                 {Object.keys(filters[filter]).map(key => {
                     return <ProjectFilter key={key} updateFilters={updateFilters} filter={filters[filter][key]}/>
                 })}

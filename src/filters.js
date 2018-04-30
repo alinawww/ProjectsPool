@@ -22,7 +22,7 @@ export const filters = {
     'cultural-values': {
         'empath': 'Empath',
         'lover': 'Lover',
-        'adventurous': 'adventurous',
+        'adventurous': 'Adventurous',
         'owner': 'Owner',
         'genius': 'Genius',
         'freebird': 'Free bird'
@@ -49,11 +49,32 @@ export const filters = {
 }
 
 export const filterLabels = {
-    'team-size': 'Team size',
-    'amount': 'How much do you need?',
-    'location': 'Where does it happen?',
-    'cultural-values': 'What cultural values should it highlight?',
-    'type-of-activity': 'What kind of activity?',
-    'duration': 'How long does it take?',
-    'repeats': 'Does it repeat?'
+    'team-size': {
+        'title': 'Team size',
+        'icon': 'people'
+    },
+    'amount': {
+        'title': 'How much do you need? (pp)',
+        'icon': 'euro_symbol'
+    },
+    'location': {
+        'title': 'Where does it happen?',
+        'icon': 'nature_people'
+    },
+    'cultural-values': {
+        'title': 'What cultural values should it highlight?',
+        'icon': 'domain'
+    },
+    'type-of-activity': {
+        'title': 'What kind of activity?',
+        'icon': 'local_activity'
+    },
+    'duration': {
+        'title': 'How long does it take?',
+        'icon': 'timelapse'
+    },
+    'repeats': {
+        'title': 'Does it repeat?',
+        'icon': 'repeat'
+    }
 }

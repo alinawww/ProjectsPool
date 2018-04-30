@@ -10,13 +10,13 @@ export const Project = (props: {project: Object}) => (
       <p className="Project__details">
         {props.project.details}
       </p>
-      <div className="Project__labels">
-        {
-          props.project.tags && props.project.tags.map(tag => {
-            return <span key={tag} className={classnames("Project__label", tag)}>{tag}</span>
-          })
-        }
-      </div>
+    </div>
+    <div className="Project__labels">
+      {
+        props.project.tags && props.project.tags.map(tag => {
+          return <span key={tag} className={classnames("Project__label", tag)}>{tag}</span>
+        })
+      }
     </div>
   </div>
 )
