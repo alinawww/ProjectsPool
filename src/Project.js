@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 export const Project = (props: {project: Object}) => (
   <div key={props.project.id} className="Project">
@@ -12,7 +13,7 @@ export const Project = (props: {project: Object}) => (
       <div className="Project__labels">
         {
           props.project.tags && props.project.tags.map(tag => {
-            return <span key={tag} className="Project__label">{tag}</span>
+            return <span key={tag} className={classnames("Project__label", tag)}>{tag}</span>
           })
         }
       </div>

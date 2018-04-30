@@ -1,19 +1,24 @@
 {
-  "name": "app_pool",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
-  },
-  "devDependencies": {
-    "react-scripts": "0.9.x"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "app_pool",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "classnames": "^2.2.5",
+        "gh-pages": "^1.1.0",
+        "react": "^16.3.0",
+        "react-dom": "^16.3.0",
+        "react-google-login": "^3.2.1"
+    },
+    "devDependencies": {
+        "react-scripts": "0.9.x"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "homepage": "https://alinawww.github.io/projects-pool"
 }

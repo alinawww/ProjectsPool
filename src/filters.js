@@ -1,50 +1,50 @@
 export const filters = {
     'team-size': {
-        'small': '1 - 6',
+        'small': '< 6',
         'medium': '6 - 12',
         'large': '12 - 20',
-        'xlarge': '20+',
-        'nan': 'doesn\'t matter'
+        'xlarge': '> 20',
+        'nan': 'NAN'
     },
     'amount': {
         'free': 'free',
-        'small': '1 - 20/pp',
-        'medium': '20 - 50/pp',
-        'large': 'sky is the limit',
-        'nan': 'doesn\'t matter'
+        'small': '< 20',
+        'medium': '20 - 50',
+        'large': '> 50',
+        'nan': 'NAN'
     },
     'location': {
-        'indoors': 'indoors',
-        'outdoors': 'outdoors',
-        'office': 'in office',
-        'nan': 'doesn\'t matter'
+        'indoors': 'Indoors',
+        'outdoors': 'Outdoors',
+        'office': 'In office',
+        'nan': 'nan'
     },
     'cultural-values': {
-        'empath': 'empath',
-        'lover': 'lover',
+        'empath': 'Empath',
+        'lover': 'Lover',
         'adventurous': 'adventurous',
-        'owner': 'owner',
-        'genius': 'genius',
+        'owner': 'Owner',
+        'genius': 'Genius',
         'freebird': 'Free bird'
     },
     'type-of-activity': {
-        'active': 'active',
-        'educational': 'educational',
-        'social': 'social',
-        'funny': 'funny',
-        'nan': 'doesn\'t matter'
+        'active': 'Active',
+        'educational': 'Educational',
+        'social': 'Social',
+        'funny': 'Funny',
+        'nan': 'NAN'
     },
     'duration': {
-        'day': 'one day',
-        'evening': 'one evening',
-        'nan': 'doesn\'t matter'
+        'day': 'A day',
+        'evening': 'One evening',
+        'nan': 'NAN'
     },
     'repeats': {
-        'no': 'no',
-        'weekly': 'weekly',
-        'monthly': 'monthly',
-        'quarterly': 'quarterly',
-        'yearly': 'yearly'
+        'no': 'No',
+        'weekly': 'Weekly',
+        'monthly': 'Monthly',
+        'quarterly': 'Quarterly',
+        'yearly': 'Yearly'
     }
 }
 
