@@ -2,9 +2,9 @@
     "name": "app_pool",
     "version": "0.1.0",
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/alinawww/ProjectsPool"
-      },
+        "type": "git",
+        "url": "https://github.com/alinawww/ProjectsPool"
+    },
     "homepage": "https://alinawww.github.io/projects-pool",
     "private": true,
     "dependencies": {
@@ -26,5 +26,5 @@
         "deploy": "./deploy.sh",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"
-    },
+    }
 }
