@@ -164,6 +164,12 @@ class App extends Component {
                     </div>
                     <div className="Projects__search">
                         <ProjectSearch updateSearch={this.updateSearch} searchText={this.state.searchTerm} />
+                        <div className="Projects__add">
+                            <div className="Projects__add-btn">
+                                <i className="material-icons Projects__add-icon">{'library_add'}</i>
+                                Add project
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="Content">

@@ -68,9 +68,24 @@
 .Projects__search {
     padding: 32px 48px;
     flex-grow: 1;
+    display: flex;
+}
+.Projects__add-btn {
+    padding: 16px;
+    display: flex;
+    background: #12cd4c;
+    margin-left: 24px;
+    border-radius: 4px;
+    color: #fff;
+    align-items: center;
+    font-weight: bold;
+}
+.Projects__add-icon {
+    margin-right: 8px;
 }
 .search-bar {
     position: relative;
+    flex-grow: 1;
 }
 .search-icon {
     position: absolute;
