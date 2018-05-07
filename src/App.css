@@ -173,3 +173,21 @@ input[type=text]:focus {
     color: #fff;
     border-color: #2196F3;
 }
+.g-connect-btn {
+    margin: 0 auto;
+    border: 0;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #448AFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all ease-in-out 200ms;
+}
+.g-connect-btn:hover {
+    background: #1976D2;
+}
+.g-connect-btn:focus {
+    outline: none;
+}

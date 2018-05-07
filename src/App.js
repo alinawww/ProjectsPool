@@ -154,7 +154,7 @@ class App extends Component {
             }))
         }
     }
-    
+
     render() {
         return (
             <div className="App">
@@ -185,7 +185,11 @@ class App extends Component {
         const projects = this.state.projects;
         if (this.state.authenticated !== true) {
             return (
-                <button onClick={ this.authenticate.bind(this) } className="btn">Connect with Google</button>
+                <div className="Projects">
+                    <div className="Projects__list">
+                        <button onClick={ this.authenticate.bind(this) } className="g-connect-btn">Connect with Google</button>
+                    </div>
+                </div>
             );
         }
         else if (projects.length) {
