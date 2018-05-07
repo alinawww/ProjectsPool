@@ -4,20 +4,20 @@ export const filters = {
         'medium': '6 - 12',
         'large': '12 - 20',
         'xlarge': '> 20',
-        'nan': 'NAN'
+        'nan': 'N/A'
     },
     'amount': {
         'free': 'free',
         'small': '< 20',
         'medium': '20 - 50',
         'large': '> 50',
-        'nan': 'NAN'
+        'nan': 'N/A'
     },
     'location': {
         'indoors': 'Indoors',
         'outdoors': 'Outdoors',
         'office': 'In office',
-        'nan': 'nan'
+        'nan': 'N/A'
     },
     'cultural-values': {
         'empath': 'Empath',
@@ -32,12 +32,12 @@ export const filters = {
         'educational': 'Educational',
         'social': 'Social',
         'funny': 'Funny',
-        'nan': 'NAN'
+        'nan': 'N/A'
     },
     'duration': {
         'day': 'A day',
         'evening': 'One evening',
-        'nan': 'NAN'
+        'nan': 'N/A'
     },
     'repeats': {
         'no': 'No',
