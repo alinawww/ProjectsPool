@@ -47,6 +47,8 @@ export function load(callback) {
                     tags
                 }
             })
+            projects.shift()
+
 
             callback({
                 projects,
