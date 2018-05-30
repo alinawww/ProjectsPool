@@ -10,6 +10,7 @@ import { checkAuth, load, appendRow } from './helpers/spreadsheet';
 // import { hash } from './helpers/utils';
 // import * as ls from './helpers/localStorage'
 import Alert from './Alert';
+import AddProjectForm from './addProjectForm'
 
 class List extends React.Component {
     render () {
@@ -136,6 +137,10 @@ class App extends Component {
         }
     }
 
+    test() {
+        console.log('testulet')
+    }
+
     updateSearch(inputValue) {
         this.setState({
             searchTerm: inputValue
@@ -162,6 +167,7 @@ class App extends Component {
                     <div className="Logo">
                         <h1>Thanks!</h1>
                     </div>
+
                     <div className="Projects__search">
                         <ProjectSearch updateSearch={this.updateSearch} searchText={this.state.searchTerm} />
                         <div className="Projects__add">
@@ -172,6 +178,7 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
+                <AddProjectForm onSubmit={this.test()} />
                 <div className="Content">
                     <div className="Navigation">
                         <div className="Navigation__filters">
@@ -180,8 +187,10 @@ class App extends Component {
                             })}
                         </div>
                     </div>
+
                     { this.renderContent() }
                 </div>
+
             </div>
         );
     }
@@ -230,7 +239,7 @@ class App extends Component {
         })
     }
     saveNewProject() {
-        
+
     }
 }
 

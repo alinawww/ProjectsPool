@@ -206,3 +206,7 @@ input[type=text]:focus {
 .g-connect-btn:focus {
     outline: none;
 }
+form {
+    display: block;
+    padding: 100px;
+}
