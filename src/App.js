@@ -6,7 +6,7 @@ import {Project} from './Project.js';
 // import {projects} from './Projects.js';
 import {filters, filterLabels} from './filters.js';
 import classnames from 'classnames';
-import { checkAuth, load } from './helpers/spreadsheet';
+import { checkAuth, load, appendRow } from './helpers/spreadsheet';
 // import { hash } from './helpers/utils';
 // import * as ls from './helpers/localStorage'
 import Alert from './Alert';
@@ -167,7 +167,7 @@ class App extends Component {
                         <div className="Projects__add">
                             <div className="Projects__add-btn">
                                 <i className="material-icons Projects__add-icon">{'library_add'}</i>
-                                Add project
+                                <a href="#add" onClick={ this.addProject.bind(this) }>Add project</a>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@ class App extends Component {
     }
 
     renderContent() {
-        console.log('this state', this.state.authenticated);
+        console.log('this state authenticated', this.state.authenticated);
         const projects = this.state.projects;
         if (this.state.authenticated !== true) {
             return (
@@ -221,6 +221,16 @@ class App extends Component {
     authenticate(e) {
         e.preventDefault();
         checkAuth(false, this.handleAuth.bind(this));
+    }
+
+    addProject(save = true) {
+        appendRow(["testproj", "anothercol", "onemore"], null, (error) => {
+            // In case an error occured while saving, alert
+            console.log('errorrrrrr', error)
+        })
+    }
+    saveNewProject() {
+        
     }
 }
 

@@ -59,14 +59,37 @@ export function load(callback) {
     });
 }
 
+// /**
+// * Update a single cell value
+// */
+// export function updateCell(column, row, value, successCallback, errorCallback) {
+//     window.gapi.client.sheets.spreadsheets.values.update({
+//         spreadsheetId: config.spreadsheetId,
+//         range: 'Sheet1!' + column + row,
+//         valueInputOption: 'USER_ENTERED',
+//         values: [ [value] ]
+//     }).then(successCallback, errorCallback);
+// }
+
 /**
 * Update a single cell value
 */
-export function updateCell(column, row, value, successCallback, errorCallback) {
-    window.gapi.client.sheets.spreadsheets.values.update({
+// values needs to be an array of all the values in the correct order
+export function appendRow(values, successCallback, errorCallback) {
+    const params = {
         spreadsheetId: config.spreadsheetId,
-        range: 'Sheet1!' + column + row,
+        range: 'A1',
+        includeValuesInResponse: true,
+        insertDataOption: 'INSERT_ROWS',
+        responseDateTimeRenderOption: 'FORMATTED_STRING',
+        responseValueRenderOption: 'FORMATTED_VALUE',
         valueInputOption: 'USER_ENTERED',
-        values: [ [value] ]
-    }).then(successCallback, errorCallback);
+    }
+    var valueRangeBody = {
+        "majorDimension": "ROWS",
+        "values": [values],
+        "range": "A1"
+    }
+    window.gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody)
+        .then(successCallback, errorCallback);
 }
