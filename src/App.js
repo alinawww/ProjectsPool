@@ -11,6 +11,8 @@ import { checkAuth, load, appendRow } from './helpers/spreadsheet';
 // import * as ls from './helpers/localStorage'
 import Alert from './Alert';
 import AddProjectForm from './addProjectForm'
+import { Provider } from "react-redux";
+import store from "./store";
 
 class List extends React.Component {
     render () {
@@ -137,8 +139,12 @@ class App extends Component {
         }
     }
 
-    test() {
-        console.log('testulet')
+    handleSubmit(values, save=true) {
+        const projectValues = Object.values(values)
+        appendRow(projectValues, null, (error) => {
+            // In case an error occured while saving, alert
+            console.log('errorrrrrr', error)
+        })
     }
 
     updateSearch(inputValue) {
@@ -178,7 +184,12 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <AddProjectForm onSubmit={this.test()} />
+                <Provider store={store}>
+                    <div style={{ padding: 15 }}>
+                      <h2>Simple Form</h2>
+                      <AddProjectForm onSubmit={this.handleSubmit} />
+                    </div>
+                </Provider>,
                 <div className="Content">
                     <div className="Navigation">
                         <div className="Navigation__filters">
@@ -232,12 +243,10 @@ class App extends Component {
         checkAuth(false, this.handleAuth.bind(this));
     }
 
-    addProject(save = true) {
-        appendRow(["testproj", "anothercol", "onemore"], null, (error) => {
-            // In case an error occured while saving, alert
-            console.log('errorrrrrr', error)
-        })
+    addProject(values, save = true) {
+        alert('shows the form')
     }
+
     saveNewProject() {
 
     }

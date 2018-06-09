@@ -1,99 +1,96 @@
-import React, { Component } from 'react';
-import { Form, Text, Radio, RadioGroup, TextArea, Checkbox, Select } from 'react-form';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
-const teamSizeOptions = [
-    {
-      label: 'small',
-      value: '< 6',
-    },
-    {
-      label: 'medium',
-      value: '6 - 12',
-    },
-    {
-      label: "large",
-      value: '12 - 20',
-    },
-    {
-      label: "xlarge",
-      value: '> 20',
-    },
-    {
-      label: "nan",
-      value: 'N/A',
-    },
-  ]
+const AddProjectForm = props => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>First Name</label>
+        <div>
+          <Field
+            name="firstName"
+            component="input"
+            type="text"
+            placeholder="First Name"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <div>
+          <Field
+            name="lastName"
+            component="input"
+            type="text"
+            placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Email</label>
+        <div>
+          <Field
+            name="email"
+            component="input"
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Sex</label>
+        <div>
+          <label>
+            <Field name="sex" component="input" type="radio" value="male" />
+            {' '}
+            Male
+          </label>
+          <label>
+            <Field name="sex" component="input" type="radio" value="female" />
+            {' '}
+            Female
+          </label>
+        </div>
+      </div>
+      <div>
+        <label>Favorite Color</label>
+        <div>
+          <Field name="favoriteColor" component="select">
+            <option />
+            <option value="ff0000">Red</option>
+            <option value="00ff00">Green</option>
+            <option value="0000ff">Blue</option>
+          </Field>
+        </div>
+      </div>
+      <div>
+        <label htmlFor="employed">Employed</label>
+        <div>
+          <Field
+            name="employed"
+            id="employed"
+            component="input"
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Notes</label>
+        <div>
+          <Field name="notes" component="textarea" />
+        </div>
+      </div>
+      <div>
+        <button type="submit" disabled={pristine || submitting}>Submit</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+    </form>
+  );
+};
 
-class AddProjectForm extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            name: '',
-            team_size: '',
-            amount: '',
-            location: '',
-            cultural_values: '',
-            type_of_activity: '',
-            duration: '',
-            repeats: '',
-            description: ''
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange = (e) => {
-        let newState = {};
-
-        newState[e.target.name] = e.target.value;
-
-        this.setState(newState);
-    }
-
-    handleSubmit = (e, message) => {
-        e.preventDefault();
-
-        const formData = {
-            formName: this.state.name,
-            formTeamSize: this.state.team_size,
-            formAmount: this.state.amount,
-            formLocation: this.state.location,
-            formCulturalValues: this.state.cultural_values,
-            formTypeOfActivity: this.state.type_of_activity,
-            formDuration: this.state.duration,
-            formRepeats: this.state.repeats,
-            formDescription: this.state.description
-        }
-
-        console.log('formData', formData);
-        // if (formData.formLastName.length < 1 || formData.formEmail.length < 1 || formData.formFirstName.length < 1) {
-        //     return false;
-        // }
-    }
-
-    render() {
-        return (
-            <Form onSubmit={this.submit} render={({ submitForm, values, addValue, removeValue }) => (
-                <form onSubmit={submitForm}>
-
-                <label htmlFor="name">{"What is the name of the proposed activity?"}</label>
-                <Text field="name" placeholder="Activity name" />
-                <br/>
-                <label htmlFor="description">{"Describe a bit the activity"}</label>
-                <Text field="description" placeholder="Activity name" />
-                <br/>
-                <label htmlFor="teamSize">{"For which team size is it adequate"}</label>
-                <Select field="teamSize" id="teamSize" options={teamSizeOptions} />
-
-                <br/>
-                <button type="submit">Submit</button>
-                </form>
-            )}
-            />
-        )
-    }
-}
-
-export default AddProjectForm
+export default reduxForm({
+  form: 'simple', // a unique identifier for this form
+})(AddProjectForm);
