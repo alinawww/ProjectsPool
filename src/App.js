@@ -17,8 +17,23 @@ import store from "./store";
 class List extends React.Component {
     render () {
         const {projects, selectedFilters} = this.props
-        const searchResults = projects.filter((project) => project.details && project.details.toLowerCase().indexOf(this.props.filter.toLowerCase()) >= 0)
-        const filteredProjects = selectedFilters.map(selectedFilter => searchResults.filter(project => project.tags.indexOf(selectedFilter) >= 0))
+        const searchResults = projects.filter((project) => {
+            const projectText = Object.values(project).join(', ').toLowerCase()
+            return projectText.indexOf(this.props.filter.toLowerCase()) >= 0
+        })
+        // const filterLabels = selectedFilters.map(selectedFilter => Object.keys(selectedFilter))
+        //
+        // const filteredProjects = selectedFilters.map(selectedFilter => {
+        //     const something = Object.keys(selectedFilter).map(filter_label => {
+        //         // console.log(searchResults);
+        //         // console.log('results', searchResults.filter(project => project[filter_label] === selectedFilter[filter_label]));
+        //         return searchResults.filter(project => project[filter_label] === selectedFilter[filter_label])
+        //     })
+        //     // console.log('something', something);
+        //     return something
+        // })
+
+        const filteredProjects = []
         const flatFilteredProjects = [].concat.apply([], filteredProjects)
         let unique_array = flatFilteredProjects.filter(function(elem, index, self) {
             return index === self.indexOf(elem);
@@ -26,10 +41,14 @@ class List extends React.Component {
         const shownProjects = selectedFilters.length
                                 ? unique_array
                                 : searchResults
+        const labels = Object.keys(projects[0]).filter(label => {
+            return label !== 'id' && label !== 'description' && label !== 'project_name'
+        })
         return (
             <div className="Projects__list">
                 {shownProjects.map(project => {
-                    return <Project key={project.id} project={project}/>
+                    // console.log('aLINAAAA', project);
+                    return <Project key={project.id} project={project} labels={labels}/>
                 })}
             </div>
         )
@@ -68,9 +87,11 @@ class ProjectFilter extends React.Component {
     }
 
     render () {
+        // console.log('in proj filter', this.props.filter);
+        // console.log(Object.values(this.props.filter));
         return (
             <span className={classnames('filter', {selected: this.state.selected})} onClick={this.handleChange}>
-                {this.props.filter}
+                {Object.values(this.props.filter)[0]}
             </span>
         )
     }
@@ -78,14 +99,21 @@ class ProjectFilter extends React.Component {
 
 class ProjectFilterGroup extends React.Component {
     render() {
+        // console.log(this.props);
         const {filter, updateFilters} = this.props
-        const groupTitle = filterLabels[filter].title
-        const groupIcon = filterLabels[filter].icon
+        const groupTitle = filters[filter].labels.title
+        const groupIcon = filters[filter].labels.icon
+        const filterOptions = Object.keys(filters[filter].options)
+        // console.log('filters[filter].options', filters[filter].options);
         return (
             <div className="filter-group">
                 <h4 className="filter-group__title"><i className="filter-group__icon material-icons">{groupIcon}</i>{groupTitle}</h4>
-                {Object.keys(filters[filter]).map(key => {
-                    return <ProjectFilter key={key} updateFilters={updateFilters} filter={filters[filter][key]}/>
+                {filterOptions.map(key => {
+                    console.log('filter', filter);
+                    console.log('filters[filter]', filters[filter]);
+                    const filterObj = {}
+                    filterObj[filter] = filters[filter].options[key]
+                    return <ProjectFilter key={key} updateFilters={updateFilters} filter={filterObj}/>
                 })}
             </div>
         )
@@ -98,7 +126,7 @@ class App extends Component {
         this.state = {
             projects: [],
             searchTerm: '',
-            filters: [],
+            filters: {},
             accessToken: ''
         }
         this.updateSearch = this.updateSearch.bind(this)
@@ -125,9 +153,7 @@ class App extends Component {
     }
 
     onLoad(data, error) {
-        console.log('dataaaa', data);
         if (data) {
-            console.log('data exists');
             this.setState({
                 ...data
             });
@@ -153,17 +179,37 @@ class App extends Component {
         });
     }
 
+    // filter is a an object: {'team_size': '6-12'}
     updateFilters(filter) {
-        if (this.state.filters.indexOf(filter) < 0) {
-            this.setState(prevState => ({
-                filters: [...prevState.filters, filter]
-            }))
-        }
-        else {
-            this.setState(prevState => ({
-                filters: prevState.filters.filter((_, i) => i !== prevState.filters.indexOf(filter))
-            }))
-        }
+
+        // Object.keys(this.state.filters).map(filter_label => {
+        //     if (Object.values(this.state.filters[filter_label]).indexOf(Object.values(filter)) < 0) {
+        //         console.log('');
+        //         this.setState(prevState => ({
+        //             filters: [...prevState.filters, filter]
+        //         }))
+        //     }
+        //     else {
+        //         this.setState(prevState => ({
+        //             filters: prevState.filters.filter((_, i) => i !== prevState.filters.indexOf(filter))
+        //         }))
+        //     }
+        // })
+        // const filterLabel = Object.keys(filter)[0]
+        // console.log('filterLabel', filterLabel);
+        // console.log('this.state.filters[filterLabel]', this.state.filters);
+        // const filterValues = this.state.filters[filterLabel]
+        // console.log('filterValues', filterValues);
+        // const filterValue = filterValues.push(Object.values(filter)[0])
+        // const updatedFilters = this.state.filters[filterLabel] = filterValues
+        //
+        // const obj = {filterValue: filterValue}
+        // // console.log('filterValue', filterValue);
+        // this.setState((prevState) => ({
+        //     filters: {...prevState.filters}
+        // }));
+        const newFilters = Object.assign(filter, this.state.filters)
+        this.setState({filters: newFilters})
     }
 
     render() {
@@ -207,7 +253,7 @@ class App extends Component {
     }
 
     renderContent() {
-        console.log('this state authenticated', this.state.authenticated);
+        // console.log('this state authenticated', this.state.authenticated);
         const projects = this.state.projects;
         if (this.state.authenticated !== true) {
             return (
@@ -221,7 +267,6 @@ class App extends Component {
         else if (projects.length) {
             return (
                 <div className="Projects">
-                    {/*<ProjectForm accessToken={this.state.accessToken}/>*/}
                     <List filter={this.state.searchTerm} selectedFilters={this.state.filters} projects={this.state.projects}/>
                 </div>
             );

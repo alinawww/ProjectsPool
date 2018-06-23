@@ -24,31 +24,18 @@ export function load(callback) {
             spreadsheetId: config.spreadsheetId,
             range: 'A1:I'
         }).then((response) => {
-            console.log(response);
-            const data = response.result.values
-            console.log(data);
+            const rows = response.result.values
+            const columns = rows[0]
+            let projects = []
 
-            const projectFields = data[0]
-            console.log(projectFields);
-            let projects = data.map((project, i) => {
-                let row = i + 2 // Save row ID fore later update
-                let id = i
-                let title = project[0]
-                let details = project[8]
-                let tags = [
-                    project[1], project[2], project[3], project[4], project[5], project[6], project[7]
-                ]
-
-                return {
-                    row,
-                    id,
-                    title,
-                    details,
-                    tags
-                }
-            })
-            projects.shift()
-
+            for (var row_idx = 1; row_idx < rows.length; row_idx++) {
+                let project = {}
+                project['id'] = row_idx
+                columns.map((field, col_idx) => {
+                    return project[field] = rows[row_idx][col_idx]
+                })
+                projects.push(project)
+            }
 
             callback({
                 projects,
@@ -58,18 +45,6 @@ export function load(callback) {
         });
     });
 }
-
-// /**
-// * Update a single cell value
-// */
-// export function updateCell(column, row, value, successCallback, errorCallback) {
-//     window.gapi.client.sheets.spreadsheets.values.update({
-//         spreadsheetId: config.spreadsheetId,
-//         range: 'Sheet1!' + column + row,
-//         valueInputOption: 'USER_ENTERED',
-//         values: [ [value] ]
-//     }).then(successCallback, errorCallback);
-// }
 
 /**
 * Update a single cell value

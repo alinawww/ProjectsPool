@@ -1,21 +1,20 @@
 import React from 'react';
 import classnames from 'classnames';
 
-export const Project = (props: {project: Object}) => (
-  <div key={props.project.id} className="Project">
+export const Project = (props: {project: Object, labels: Array<String>}) => (
+  props.project && <div key={props.project.id} className="Project">
     <div className="Project__image">
     </div>
     <div className="Project__description">
-      <h2 className="Project__name">{props.project.title}</h2>
+      <h2 className="Project__name">{props.project.project_name}</h2>
       <p className="Project__details">
-        {props.project.details}
+        {props.project.description}
       </p>
     </div>
     <div className="Project__labels">
       {
-        props.project.tags && props.project.tags.map(tag => {
-          return <span key={tag} className={classnames("Project__label", tag)}>{tag}</span>
-        })
+          props.labels.map(label => <div key={label} className="labelrow">{label}: {props.project[label]}</div>)
+
       }
     </div>
   </div>
