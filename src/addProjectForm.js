@@ -6,79 +6,123 @@ const AddProjectForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>First Name</label>
+        <label>Project Name</label>
         <div>
           <Field
-            name="firstName"
+            name="projectName"
             component="input"
             type="text"
-            placeholder="First Name"
+            placeholder="Project Name"
           />
         </div>
       </div>
+
+
       <div>
-        <label>Last Name</label>
+        <label>Team Size</label>
         <div>
-          <Field
-            name="lastName"
-            component="input"
-            type="text"
-            placeholder="Last Name"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Email</label>
-        <div>
-          <Field
-            name="email"
-            component="input"
-            type="email"
-            placeholder="Email"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Sex</label>
-        <div>
-          <label>
-            <Field name="sex" component="input" type="radio" value="male" />
-            {' '}
-            Male
-          </label>
-          <label>
-            <Field name="sex" component="input" type="radio" value="female" />
-            {' '}
-            Female
-          </label>
-        </div>
-      </div>
-      <div>
-        <label>Favorite Color</label>
-        <div>
-          <Field name="favoriteColor" component="select">
+          <Field name="teamSize" component="select">
             <option />
-            <option value="ff0000">Red</option>
-            <option value="00ff00">Green</option>
-            <option value="0000ff">Blue</option>
+            <option value="small">{"< 6"}</option>
+            <option value="medium">{"6 - 12"}</option>
+            <option value="large">{"12 - 20"}</option>
+            <option value="xlarge">{"> 20"}</option>
+            <option value="nan">{"N/A"}</option>
+          </Field>
+        </div>
+      </div>
+
+
+      <div>
+        <label>Amount</label>
+        <div>
+          <Field name="amount" component="select">
+            <option />
+            <option value="free">{"free"}</option>
+            <option value="small">{"< 20"}</option>
+            <option value="medium">{"20 - 50"}</option>
+            <option value="large">{"> 50"}</option>
+            <option value="nan">{"N/A"}</option>
+          </Field>
+        </div>
+      </div>
+
+      <div>
+        <label>Location</label>
+        <div>
+          <Field name="location" component="select">
+            <option />
+            <option value="indoors">{"Indoors"}</option>
+            <option value="outdoors">{"Outdoors"}</option>
+            <option value="office">{"In office"}</option>
+            <option value="nan">{"N/A"}</option>
+          </Field>
+        </div>
+      </div>
+
+      <div>
+        <label>Cultural Values</label>
+        <div>
+          <Field name="culturalValues" component="select">
+            <option />
+            <option value="empath">{"Empath"}</option>
+            <option value="lover">{"Lover"}</option>
+            <option value="adventurous">{"Adventurous"}</option>
+            <option value="owner">{"Owner"}</option>
+            <option value="genius">{"Genius"}</option>
+            <option value="freebird">{"Freebird"}</option>
           </Field>
         </div>
       </div>
       <div>
-        <label htmlFor="employed">Employed</label>
+        <label>Type of Activity</label>
         <div>
-          <Field
-            name="employed"
-            id="employed"
-            component="input"
-            type="checkbox"
-          />
+          <Field name="typeOfActivity" component="select">
+            <option />
+            <option value="active">{"Active"}</option>
+            <option value="educational">{"Educational"}</option>
+            <option value="social">{"Social"}</option>
+            <option value="funny">{"Funny"}</option>
+            <option value="nan">{"N/A"}</option>
+          </Field>
+        </div>
+      </div>
+
+
+      <div>
+        <label>Duration</label>
+        <div>
+          <Field name="duration" component="select">
+            <option />
+            <option value="day">{"A day"}</option>
+            <option value="evening">{"One evening"}</option>
+            <option value="nan">{"N/A"}</option>
+          </Field>
+        </div>
+      </div>
+
+      <div>
+        <label>Does it repeat?</label>
+        <div>
+          <Field name="repeats" component="select">
+            <option />
+            <option value="no">{"No"}</option>
+            <option value="weekly">{"Weekly"}</option>
+            <option value="monthly">{"Monthly"}</option>
+            <option value="quarterly">{"Quarterly"}</option>
+            <option value="yearly">{"Yearly"}</option>
+          </Field>
         </div>
       </div>
       <div>
-        <label>Notes</label>
+        <label>Project Description</label>
         <div>
-          <Field name="notes" component="textarea" />
+          <Field
+            name="projectDescription"
+            component="textarea"
+            type="text"
+            placeholder="Project Description"
+          />
         </div>
       </div>
       <div>
